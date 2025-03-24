@@ -61,13 +61,46 @@
         </dependency>
  </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+<build>
+  	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-resources-plugin</artifactId>
+      <version>3.2.0</version>
+      <executions>
+        <execution>
+          <phase>generate-resources</phase>
+          <goals>
+            <goal>resources</goal>
+          </goals>
+          <configuration>
+            <filters>
+				<filter>src/main/resources/application-prod.properties</filter>
+            </filters>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
+
+<profiles>
+  <profile>
+    <id>dev</id>
+    <properties>
+      <active.profile>application-dev</active.profile>
+    </properties>
+  </profile>
+  <profile>
+    <id>prod</id>
+    <properties>
+      <active.profile>application-prod</active.profile>
+    </properties>
+  </profile>
+</profiles>
 
 </project>
