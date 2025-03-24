@@ -22,7 +22,7 @@ Java 17+
 
 Maven
 
-Microsoft SQL Server
+Microsoft SQL Server/ Azure MSSQL Server
 
 Docker (if running in a containerized environment)
 
@@ -43,19 +43,19 @@ sqlcmd -S localhost -U sa -P your_password
 Update src/main/resources/application.properties with your database and API credentials:
 
 # Microsoft SQL Server Configuration
-spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=deviceatlas_db;encrypt=false
-spring.datasource.username=sa
-spring.datasource.password=your_password
-spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=deviceatlas_db;encrypt=false  
+spring.datasource.username=sa   
+spring.datasource.password=your_password   
+spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver   
 
 # JPA Configuration
-spring.jpa.database-platform=org.hibernate.dialect.SQLServerDialect
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
+spring.jpa.database-platform=org.hibernate.dialect.SQLServerDialect  
+spring.jpa.hibernate.ddl-auto=update  
+spring.jpa.show-sql=true  
 
 # DeviceAtlas API Configuration
-deviceatlas.api.url=https://region0.deviceatlascloud.com/v1/detect/properties
-deviceatlas.license.key=YOUR_LICENSE_KEY
+deviceatlas.api.url=https://region0.deviceatlascloud.com/v1/detect/properties  
+deviceatlas.license.key=YOUR_LICENSE_KEY  
 
 4. Build and Run the Application
 
