@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Comparator;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -51,12 +53,24 @@ public class DeviceService {
         }
     }
 
-    public List<Device> getTablets() {
-        return deviceRepository.findByPrimaryHardwareType("Tablet");
-    }
-
     public List<Device> getAll(){
         return deviceRepository.findAll();
+    }
+
+    public List<Device> getTablets() {
+    return deviceRepository.findByPrimaryHardwareType("Tablet")
+            .stream()
+            .sorted(Comparator.comparingDouble(device -> parseOsVersion(device.getOsVersion())))
+            .collect(Collectors.toList());
+    }
+
+    // ✅ Convert `osVersion` to a comparable numeric format
+    private double parseOsVersion(String osVersion) {
+        try {
+            return Double.parseDouble(osVersion.replaceAll("[^0-9.]", ""));
+        } catch (NumberFormatException e) {
+            return 0.0; // Default for invalid versions
+        }
     }
 }
 
